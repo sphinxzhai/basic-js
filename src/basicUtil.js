@@ -43,7 +43,7 @@ if (!String.prototype.startsWith) {
 }
 
 var basicUtil = {};
-basicUtil.version = '201304261156';
+basicUtil.version = '201306061145';
 
 basicUtil.string = {
     /**
@@ -276,6 +276,25 @@ basicUtil.toolkit = {
         };
         traceImg123423453456.src = traceUrl;
         return traceUrl;
+    },
+    /**
+     * download input file url
+     * @param {string} fileUrl
+     * @returns {string} input fileUrl
+     */
+    download: function(fileUrl) {
+        if (['zip'].indexOf(fileUrl.split('.').pop()) === -1) {
+            window.open(fileUrl);
+            return fileUrl;
+        } else {
+            var iframe = document.createElement('iframe');
+            iframe.style.width = '1px';
+            iframe.style.height = '1px';
+            iframe.style.border = 'none';
+            iframe.src = fileUrl;
+            document.body.appendChild(iframe);
+            return fileUrl;
+        }
     }
 };
 
