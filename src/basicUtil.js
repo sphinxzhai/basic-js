@@ -1,6 +1,7 @@
+//git path https://github.com/sphinxzhai/basic-js
 //browser compatibility 
 if (!String.prototype.trim) {
-    String.prototype.trim = function() {
+    String.prototype.trim = function () {
         var s = this;
         while (s.charAt(0) === ' ') {
             s = s.substr(1, s.length);
@@ -13,7 +14,7 @@ if (!String.prototype.trim) {
 }
 
 if (!Array.prototype.indexOf) {
-    Array.prototype.indexOf = function(elt /*, from*/) {
+    Array.prototype.indexOf = function (elt /*, from*/) {
         var len = this.length;
 
         var from = Number(arguments[1]) || 0;
@@ -32,7 +33,7 @@ if (!Array.prototype.indexOf) {
 }
 
 if (!String.prototype.startsWith) {
-    String.prototype.startsWith = function(subString) {
+    String.prototype.startsWith = function (subString) {
         var s = this;
         if (s.indexOf(subString) === 0) {
             return true;
@@ -51,7 +52,7 @@ basicUtil.string = {
      * @param {String/int} num num to be formated
      * @returns {string} string of num in comma fomat
      */
-    getNumStringWithComma: function(num) {
+    getNumStringWithComma: function (num) {
         var numS = num + '';
         var formatedString = '';
         for (var i = 0; i < numS.length; i = i + 3) {
@@ -73,7 +74,7 @@ basicUtil.cookie = {
      * @param {boolean} secure secure of cookie
      * @returns {string}
      */
-    setCookie: function(name, value, expires, path, domain, secure)
+    setCookie: function (name, value, expires, path, domain, secure)
     {
         // set time, it's in milliseconds
         var today = new Date();
@@ -92,7 +93,7 @@ basicUtil.cookie = {
      * @param {string} name name of cookie
      * @returns {string} value of cookie, if cookie does not exist, null is returned
      */
-    getCookie: function(name) {
+    getCookie: function (name) {
         // first we'll split this cookie up into name/value pairs
         // note: document.cookie only returns name=value, not the other components
         var a_all_cookies = document.cookie.split(';');
@@ -136,7 +137,7 @@ basicUtil.cookie = {
      * @param {string} name name of cookie
      * @returns {object} if value can not be parsed to object, null is returned
      */
-    getCookieInJson: function(name) {
+    getCookieInJson: function (name) {
         var cookieVal = this.getCookie(name);
         try {
             var obj = eval('(' + cookieVal + ')');
@@ -153,7 +154,7 @@ basicUtil.cookie = {
      * @param {string} domain
      * @returns {string}
      */
-    delCookie: function(name, path, domain)
+    delCookie: function (name, path, domain)
     {
         var cookieVal = name + "=" + ((path) ? ";path=" + path : ";path=/") + ((domain) ? ";domain=" + domain : "") + ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
         document.cookie = cookieVal;
@@ -166,21 +167,21 @@ basicUtil.url = {
      * Get protocol of query.
      * @returns {string}  http/https
      */
-    getProtocol: function() {
+    getProtocol: function () {
         return window.location.href.split('://', 1)[0];
     },
     /**
      * Get domain of host
      * @returns {string}
      */
-    getDomain: function() {
+    getDomain: function () {
         return window.location.href.split('://')[1].split(/[/]+/, 1)[0];
     },
     /**
      * Get dir of query
      * @returns {string} with start slash, with no end slash(/)
      */
-    getQueryDir: function() {
+    getQueryDir: function () {
         return window.location.href.split('://')[1].split('?', 1)[0].replace(this.getDomain(), '').split(/\/$/, 1)[0];
     },
     /**
@@ -188,7 +189,7 @@ basicUtil.url = {
      * @param {string} key
      * @returns {string}
      */
-    getQueryKey: function(key) {
+    getQueryKey: function (key) {
         var splitByKey = window.location.href.split('#', 1)[0].replace(window.location.href.split('?', 1) + '?', '').split(key + '=');
         if (splitByKey.length === 1) {
             return null;
@@ -200,7 +201,7 @@ basicUtil.url = {
      * Get fragment id
      * @returns {string}
      */
-    getFragment: function() {
+    getFragment: function () {
         var fragment = window.location.href.replace(window.location.href.split('#', 1)[0] + '#', '');
         return fragment;
     }
@@ -213,15 +214,15 @@ basicUtil.toolkit = {
      * @param {string} newWindowUrl
      * @returns {string} traceUrl
      */
-    traceBeforeOpenNewWindow: function(traceUrl, newWindowUrl) {
+    traceBeforeOpenNewWindow: function (traceUrl, newWindowUrl) {
         var traceImg123423453456 = new Image();
-        traceImg123423453456.onload = function() {
+        traceImg123423453456.onload = function () {
             window.open(newWindowUrl);
         };
 //        traceImg123423453456.onabort = function() {
 //            window.open(newWindowUrl);
 //        };
-        traceImg123423453456.onerror = function() {
+        traceImg123423453456.onerror = function () {
             window.open(newWindowUrl);
         };
         traceImg123423453456.src = traceUrl;
@@ -233,13 +234,13 @@ basicUtil.toolkit = {
      * @param {string} newWindowUrl
      * @returns {string} traceUrl
      */
-    _traceAfterOpenNewWindow: function(traceUrl, newWindowUrl) {
+    _traceAfterOpenNewWindow: function (traceUrl, newWindowUrl) {
         var w = window.open(newWindowUrl);
-        w.onload = function() {
+        w.onload = function () {
             var traceImg123423453456 = new Image();
             traceImg123423453456.src = traceUrl;
         };
-        w.onerror = function() {
+        w.onerror = function () {
             var traceImg123423453456 = new Image();
             traceImg123423453456.src = traceUrl;
         };
@@ -251,28 +252,28 @@ basicUtil.toolkit = {
      * @param {string} newPageUrl
      * @returns {string} traceUrl
      */
-    traceLoadNewUrl: function(traceUrl, newPageUrl) {
+    traceLoadNewUrl: function (traceUrl, newPageUrl) {
         var traceImg123423453456 = new Image();
-        traceImg123423453456.onload = function() {
+        traceImg123423453456.onload = function () {
             window.location.href = newPageUrl;
         };
 //        traceImg123423453456.onabort = function() {
 //            window.location.href = newPageUrl;
 //        };
-        traceImg123423453456.onerror = function() {
+        traceImg123423453456.onerror = function () {
             window.location.href = newPageUrl;
         };
         traceImg123423453456.src = traceUrl;
         return traceUrl;
     },
-    trace: function(traceUrl) {
+    trace: function (traceUrl) {
         var traceImg123423453456 = new Image();
-        traceImg123423453456.onload = function() {
+        traceImg123423453456.onload = function () {
         };
 //        traceImg123423453456.onabort = function() {
 //            window.location.href = newPageUrl;
 //        };
-        traceImg123423453456.onerror = function() {
+        traceImg123423453456.onerror = function () {
         };
         traceImg123423453456.src = traceUrl;
         return traceUrl;
@@ -282,7 +283,7 @@ basicUtil.toolkit = {
      * @param {string} fileUrl
      * @returns {string} input fileUrl
      */
-    download: function(fileUrl) {
+    download: function (fileUrl) {
         if (['zip'].indexOf(fileUrl.split('.').pop()) === -1) {
             window.open(fileUrl);
             return fileUrl;
@@ -299,7 +300,7 @@ basicUtil.toolkit = {
 };
 
 basicUtil.browser = {
-    getBrowserInfo: function() {
+    getBrowserInfo: function () {
         var Sys = {};
         var ua = navigator.userAgent.toLowerCase();
         var s;
@@ -319,20 +320,16 @@ basicUtil.browser = {
         if (Sys.ie) {
             info.app = 'ie';
             info.version = Sys.ie;
-        }
-        else if (Sys.firefox) {
+        } else if (Sys.firefox) {
             info.app = 'ff';
             info.version = Sys.firefox;
-        }
-        else if (Sys.chrome) {
+        } else if (Sys.chrome) {
             info.app = 'chrome';
             info.version = Sys.chrome;
-        }
-        else if (Sys.opera) {
+        } else if (Sys.opera) {
             info.app = 'opera';
             info.version = Sys.opera;
-        }
-        else if (Sys.safari) {
+        } else if (Sys.safari) {
             info.app = 'safari';
             info.version = Sys.safari;
         }
