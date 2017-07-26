@@ -1,0 +1,1 @@
+(function(){ var tag = jQuery('.title-info strong:first').text().trim(); window.open('https://idope.se/torrent-list/'+tag); })();
